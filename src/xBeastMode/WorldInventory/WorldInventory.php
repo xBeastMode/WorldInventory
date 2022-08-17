@@ -28,6 +28,10 @@ class WorldInventory extends PluginBase{
                 $this->getServer()->getPluginManager()->registerEvents(new WorldInventoryListener($this), $this);
         }
 
+        protected function onDisable(): void{
+                if(isset($this->database)) $this->database->close();
+        }
+
         /**
          * Returns the inventory type used for passed world name
          *

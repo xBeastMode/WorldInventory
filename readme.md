@@ -1,6 +1,13 @@
 # <div style="text-align: center;">WorldInventory 1.0.0</div>
 ### <div style="text-align: center;">by xBeastMode</div>
-## Features
+
+<div style="text-align: center;">
+<img src="https://github.com/xBeastMode/WorldInventory/raw/master/icon.png" alt="">
+</div>
+
+[![](https://poggit.pmmp.io/shield.api/WorldInventory)](https://poggit.pmmp.io/p/WorldInventory)
+[![](https://poggit.pmmp.io/shield.dl/WorldInventory)](https://poggit.pmmp.io/p/WorldInventory)
+# Feature
 - [x] Clear inventories between worlds
 - [x] Link inventories between worlds
 - [x] Save individual inventories per world
@@ -11,7 +18,7 @@
 
 If you have an idea for a change or a feature create an issue!
 
-## Configuration
+# Configuration
 
 The supported database types are "mysql" and "sqlite", you can find these values in the default plugin config as so:
 ```yaml
@@ -70,7 +77,7 @@ items:
       - "diamond_sword:1:custom sword:custom lore:protection:1"
 ```
 
-## Inventory types:
+# Inventory types
 - `clear` if I go to world with this inventory type my inventory will get cleared, even if I collected items they will not be saved and everytime I go back to that world my inventory will be cleared.
 - `linked` worlds that share this inventory type will combine player's inventory, meaning if I go from world `a` to `b` and they share the `linked` inventory type they will be the same exact inventory.
 - `saved` instead of getting linked between worlds, player's inventory is now unique to that world. If `c` uses `saved` inventory type, and player from `a` to `c` instead of getting their inventory linked like from `a` to `b`, player's inventory is now a new inventory and everything the player has in that world will be saved only to world `c`.
