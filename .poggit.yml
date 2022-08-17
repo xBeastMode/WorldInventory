@@ -6,4 +6,7 @@ projects:
   WorldInventory:
     path: ""
     icon: "icon.png"
+    libs:
+      - src: poggit/libasynql/libasynql
+        version: ^4.1.1
 ...
