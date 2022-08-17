@@ -1,6 +1,6 @@
 ---
 name: WorldInventory
-version: 1.0.0
+version: 1.0.1
 main: xBeastMode\WorldInventory\WorldInventory
 api: 4.7.1
 ...
