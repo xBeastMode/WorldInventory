@@ -1,7 +1,8 @@
 <?php
 
-namespace xBeastMode\WorldInventory;
+declare(strict_types=1);
 
+namespace xBeastMode\WorldInventory;
 class RawPlayerWorldInventoryResult{
         public function __construct(
                 public array $inventoryContents = [],

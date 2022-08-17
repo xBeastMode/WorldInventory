@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace xBeastMode\WorldInventory;
 use pocketmine\block\Air;
 use pocketmine\data\bedrock\EnchantmentIdMap;
