@@ -3,5 +3,4 @@ name: WorldInventory
 version: 1.0.0
 main: xBeastMode\WorldInventory\WorldInventory
 api: 4.7.1
-src-namespace-prefix: xBeastMode\WorldInventory
 ...
