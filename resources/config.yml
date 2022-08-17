@@ -1,0 +1,51 @@
+---
+database:
+  # The database type. "sqlite" and "mysql" are supported.
+  type: sqlite
+  # Edit these settings only if you choose "sqlite".
+  sqlite:
+    # The file name of the database in the plugin data folder.
+    # You can also put an absolute path here.
+    file: data.sqlite
+  # Edit these settings only if you choose "mysql".
+  mysql:
+    host: 127.0.0.1
+    # Avoid using the "root" user for security reasons.
+    username: root
+    password: ""
+    schema: your_schema
+  # The maximum number of simultaneous SQL queries
+  # Recommended: 1 for sqlite, 2 for MySQL. You may want to further increase this value if your MySQL connection is very slow.
+  worker-limit: 1
+# the inventory types for worlds
+# clear - player's inventory gets cleared in world
+# linked - player's inventory will be linked (the same) in worlds using this type
+# saved - player's inventory will be unique to that world
+# custom - player's inventory will be set to custom items see "items" config for example
+worlds:
+  world: "linked"
+  foo: "linked"
+  bar: "saved"
+  baz: "clear"
+  qux: "custom"
+# custom item definitions for custom inventory type worlds
+# the format should be defined as so:
+# items:
+#   world_name:
+#     armor:
+#       - "item name:item count:custom item name:custom item lore:enchantments..."
+#     inventory:
+#       - "item name:item count:custom item name:custom item lore:enchantments..."
+#
+# enchantments can be one or multiple as so:
+#   protection:1:unbreaking:1...etc...
+items:
+  qux:
+    armor:
+      - "diamond_helmet:1:custom armor:custom lore:protection:1"
+      - "diamond_chestplate:1:custom armor:custom lore:protection:1"
+      - "diamond_leggings:1:custom armor:custom lore:protection:1"
+      - "diamond_boots:1:custom armor:custom lore:protection:1"
+    inventory:
+      - "diamond_sword:1:custom sword:custom lore:protection:1"
+...
