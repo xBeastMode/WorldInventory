@@ -16,45 +16,42 @@ final class ItemParser{
          * Parses items from string using item names.
          * Legacy item ids no longer supported.
          *
-         * @param Item[] $items
+         * @param Item[]|string $items
          *
          * @return Item[]
          */
         public static function parse(array $items): array{
                 $outputItems = [];
                 foreach($items as $item){
-                        if($item instanceof Item){
-                                $outputItems[] = $item;
-                        }else{
+                        if(!$item instanceof Item){
+                                if(!is_string($item)) continue;
 
                                 $parts = explode(":", $item);
 
-                                $itemName = array_shift($parts);
-                                $amount = array_shift($parts);
-                                $name = array_shift($parts);
-                                $lore = array_shift($parts);
+                                $itemName = array_shift($parts) ?? "air";
+                                $amount = (int) array_shift($parts) ?? 1;
+                                $name = array_shift($parts) ?? "default";
+                                $lore = array_shift($parts) ?? "";
 
                                 $item = StringToItemParser::getInstance()->parse($itemName);
-                                if(!$item instanceof Air){
-                                        if($lore && $lore !== ""){
-                                                $item->setLore(explode("\n", TextFormat::colorize($lore)));
-                                        }
+                                if($item instanceof Air) continue;
 
-                                        $item->setCount($amount);
-                                        $parts = implode(":", $parts);
-
-                                        foreach(self::parseEnchantments([$parts]) as $enchant){
-                                                $item->addEnchantment($enchant);
-                                        }
-
-                                        if(strtolower($name) !== "default"){
-                                                $item->setCustomName(TextFormat::colorize($name));
-                                        }
-
-                                        $outputItems[] = $item;
+                                if($lore && $lore !== ""){
+                                        $item->setLore(explode("\n", TextFormat::colorize($lore)));
                                 }
 
+                                $item->setCount($amount);
+                                $parts = implode(":", $parts);
+
+                                foreach(self::parseEnchantments([$parts]) as $enchant){
+                                        $item->addEnchantment($enchant);
+                                }
+
+                                if(strtolower($name) !== "default"){
+                                        $item->setCustomName(TextFormat::colorize($name));
+                                }
                         }
+                        $outputItems[] = $item;
                 }
 
                 return $outputItems;
@@ -63,7 +60,7 @@ final class ItemParser{
         /**
          * Parse enchantments either by name or id.
          *
-         * @param string[] $enchantments
+         * @param EnchantmentInstance[]|string[] $enchantments
          *
          * @return EnchantmentInstance[]
          */

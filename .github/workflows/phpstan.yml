@@ -9,10 +9,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Download PHP Binary
-        run: wget https://jenkins.pmmp.io/job/PHP-8.1-Aggregate/lastSuccessfulBuild/artifact/PHP-8.1-Linux-x86_64.tar.gz
-      - name: Extract PHP Binary
-        run: tar xvf PHP-8.1-Linux-x86_64.tar.gz
+      - name: Install PHP Binary
+        run: wget https://jenkins.pmmp.io/job/PHP-8.1-Aggregate/lastSuccessfulBuild/artifact/PHP-8.1-Linux-x86_64.tar.gz && tar xvf PHP-8.1-Linux-x86_64.tar.gz
       - name: Install Composer
         run: curl -sS https://getcomposer.org/installer | php
       - name: Install Composer Dependencies
