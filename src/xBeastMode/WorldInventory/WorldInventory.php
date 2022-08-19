@@ -268,17 +268,6 @@ class WorldInventory extends PluginBase{
          * @return Item[]
          */
         private function decodeInventoryData(string $data): array{
-                /**
-                 * @var array<array<string, int|string>> $_
-                 * @phpstan-var array<array{
-                 * 	id: int,
-                 * 	damage?: int,
-                 * 	count?: int,
-                 * 	nbt?: string,
-                 * 	nbt_hex?: string,
-                 * 	nbt_b64?: string
-                 * }> $_
-                 */
                 $_ = json_decode($data, true);
                 array_walk($_, function(array &$item_data) {
                         /**
@@ -294,6 +283,7 @@ class WorldInventory extends PluginBase{
                          */
                         $item_data = Item::jsonDeserialize($item_data);
                 });
+                /** @var Item[] $_ */
                 return $_;
         }
 }
