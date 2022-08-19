@@ -37,7 +37,7 @@ final class ItemParser{
                                 if($item === null || $item->isNull()) continue;
 
                                 if(isset($lore) && $lore !== ""){
-                                        $item->setLore(explode("\n", TextFormat::colorize($lore ?? "")));
+                                        $item->setLore(explode("\n", TextFormat::colorize($lore)));
                                 }
 
                                 $item->setCount($amount);
@@ -47,7 +47,7 @@ final class ItemParser{
                                         $item->addEnchantment($enchant);
                                 }
 
-                                if(strtolower($name ?? "default") !== "default"){
+                                if(isset($name) && strtolower($name) !== "default"){
                                         $item->setCustomName(TextFormat::colorize($name));
                                 }
                         }
