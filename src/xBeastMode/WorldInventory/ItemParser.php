@@ -33,9 +33,10 @@ final class ItemParser{
                                 $name = array_shift($parts);
                                 $lore = array_shift($parts);
 
-                                $item = StringToItemParser::getInstance()->parse($itemName);
+                                $item = StringToItemParser::getInstance()->parse($itemName ?? "air");
+                                if($item === null || $item->isNull()) continue;
 
-                                if($lore && $lore !== ""){
+                                if(isset($lore) && $lore !== ""){
                                         $item->setLore(explode("\n", TextFormat::colorize($lore)));
                                 }
 

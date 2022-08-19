@@ -50,7 +50,7 @@ class WorldInventory extends PluginBase{
          *
          * @param string $world
          *
-         * @return Item[][]
+         * @return array<int, array<int, Item|null>>
          */
         public function getWorldCustomItems(string $world): array{
                 /** @var string[][] $items */
@@ -268,8 +268,8 @@ class WorldInventory extends PluginBase{
          */
         private function decodeInventoryData(string $data): array{
                 /**
-                 * @var array $_
-                 * @phpstan-param array{
+                 * @var array<string, int|string> $_
+                 * @phpstan-var array{
                  * 	id: int,
                  * 	damage?: int,
                  * 	count?: int,
