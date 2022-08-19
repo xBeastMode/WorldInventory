@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace xBeastMode\WorldInventory;
 use Closure;
+use pocketmine\event\entity\ItemMergeEvent;
 use pocketmine\item\Item;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
@@ -50,7 +51,7 @@ class WorldInventory extends PluginBase{
          *
          * @param string $world
          *
-         * @return array<int, array<int, Item|null>>
+         * @return Item[][]
          */
         public function getWorldCustomItems(string $world): array{
                 /** @var string[][] $items */
@@ -268,6 +269,18 @@ class WorldInventory extends PluginBase{
          */
         private function decodeInventoryData(string $data): array{
                 /**
+                 * @var array<array<string, int|string>> $_
+                 * @phpstan-var array<array{
+                 * 	id: int,
+                 * 	damage?: int,
+                 * 	count?: int,
+                 * 	nbt?: string,
+                 * 	nbt_hex?: string,
+                 * 	nbt_b64?: string
+                 * }> $_
+                 */
+                $_ = json_decode($data, true);
+                /**
                  * @var array<string, int|string> $_
                  * @phpstan-var array{
                  * 	id: int,
@@ -276,9 +289,8 @@ class WorldInventory extends PluginBase{
                  * 	nbt?: string,
                  * 	nbt_hex?: string,
                  * 	nbt_b64?: string
-                 * } $_
+                 * } $item_data
                  */
-                $_ = json_decode($data, true);
                 array_walk($_, fn(array &$item_data) => $item_data = Item::jsonDeserialize($item_data));
                 return $_;
         }

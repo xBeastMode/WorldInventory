@@ -33,11 +33,11 @@ final class ItemParser{
                                 $name = array_shift($parts);
                                 $lore = array_shift($parts);
 
-                                $item = StringToItemParser::getInstance()->parse($itemName ?? "air");
+                                $item = StringToItemParser::getInstance()->parse($itemName);
                                 if($item === null || $item->isNull()) continue;
 
                                 if(isset($lore) && $lore !== ""){
-                                        $item->setLore(explode("\n", TextFormat::colorize($lore)));
+                                        $item->setLore(explode("\n", TextFormat::colorize($lore ?? "")));
                                 }
 
                                 $item->setCount($amount);
@@ -47,7 +47,7 @@ final class ItemParser{
                                         $item->addEnchantment($enchant);
                                 }
 
-                                if(strtolower($name) !== "default"){
+                                if(strtolower($name ?? "default") !== "default"){
                                         $item->setCustomName(TextFormat::colorize($name));
                                 }
                         }
