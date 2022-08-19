@@ -18,7 +18,7 @@ final class ItemParser{
          *
          * @param Item[]|string[] $items
          *
-         * @return array<int, Item|null>
+         * @return Item[]
          */
         public static function parse(array $items): array{
                 $outputItems = [];

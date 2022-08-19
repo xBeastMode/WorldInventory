@@ -51,7 +51,7 @@ class WorldInventory extends PluginBase{
          *
          * @param string $world
          *
-         * @return Item[][]|array<int, array<int, Item|null>>
+         * @return Item[][]
          */
         public function getWorldCustomItems(string $world): array{
                 /** @var string[][] $items */
@@ -265,7 +265,7 @@ class WorldInventory extends PluginBase{
          *
          * @param string $data
          *
-         * @return Item[]|array<string, int|string>
+         * @return Item[]
          */
         private function decodeInventoryData(string $data): array{
                 /**
