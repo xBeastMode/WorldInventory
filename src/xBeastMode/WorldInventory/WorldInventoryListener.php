@@ -75,7 +75,7 @@ class WorldInventoryListener implements Listener{
                                 $this->plugin->savePlayerWorldInventory($world, $player, $onFinished);
                                 break;
                         default:
-                                $onFinished();
+                                if(isset($onFinished)) $onFinished();
                                 break;
                 }
         }

@@ -16,9 +16,9 @@ final class ItemParser{
          * Parses items from string using item names.
          * Legacy item ids no longer supported.
          *
-         * @param Item[]|string $items
+         * @param Item[]|string[] $items
          *
-         * @return Item[]
+         * @return array<int, Item|null>
          */
         public static function parse(array $items): array{
                 $outputItems = [];
@@ -28,13 +28,12 @@ final class ItemParser{
 
                                 $parts = explode(":", $item);
 
-                                $itemName = array_shift($parts) ?? "air";
-                                $amount = (int) array_shift($parts) ?? 1;
-                                $name = array_shift($parts) ?? "default";
-                                $lore = array_shift($parts) ?? "";
+                                $itemName = array_shift($parts);
+                                $amount = (int) array_shift($parts);
+                                $name = array_shift($parts);
+                                $lore = array_shift($parts);
 
                                 $item = StringToItemParser::getInstance()->parse($itemName);
-                                if($item instanceof Air) continue;
 
                                 if($lore && $lore !== ""){
                                         $item->setLore(explode("\n", TextFormat::colorize($lore)));

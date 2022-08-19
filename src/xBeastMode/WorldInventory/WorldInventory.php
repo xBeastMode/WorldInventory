@@ -40,7 +40,9 @@ class WorldInventory extends PluginBase{
          * @return string
          */
         public function getWorldInventoryType(string $world): string{
-                return $this->getConfig()->getNested("worlds.$world", "@linked");
+                /** @var string $output */
+                $output = $this->getConfig()->getNested("worlds.$world", "@linked");
+                return $output;
         }
 
         /**
@@ -51,6 +53,7 @@ class WorldInventory extends PluginBase{
          * @return Item[][]
          */
         public function getWorldCustomItems(string $world): array{
+                /** @var string[][] $items */
                 $items = $this->getConfig()->getNested("items.$world", [[], []]);
 
                 if(count($items) === 0){
@@ -235,7 +238,7 @@ class WorldInventory extends PluginBase{
          * @param string $xuid
          * @param Closure $onResult
          */
-        private function playerWorldInventoryContentsExist(string $world, string $name, string $xuid, Closure $onResult){
+        private function playerWorldInventoryContentsExist(string $world, string $name, string $xuid, Closure $onResult): void{
                 $this->database->executeSelect("inventories.select.both", [
                         "name"  => $name,
                         "xuid" => $xuid,
@@ -252,7 +255,8 @@ class WorldInventory extends PluginBase{
          */
         private function encodeInventoryContents(array $contents): string{
                 array_walk($contents, fn(Item &$item, int $key) => $item = $item->jsonSerialize());
-                return json_encode($contents);
+                $_ = json_encode($contents);
+                return $_ === false ? "" : $_;
         }
 
         /**
@@ -263,6 +267,17 @@ class WorldInventory extends PluginBase{
          * @return Item[]
          */
         private function decodeInventoryData(string $data): array{
+                /**
+                 * @var array $_
+                 * @phpstan-param array{
+                 * 	id: int,
+                 * 	damage?: int,
+                 * 	count?: int,
+                 * 	nbt?: string,
+                 * 	nbt_hex?: string,
+                 * 	nbt_b64?: string
+                 * } $_
+                 */
                 $_ = json_decode($data, true);
                 array_walk($_, fn(array &$item_data) => $item_data = Item::jsonDeserialize($item_data));
                 return $_;
