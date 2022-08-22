@@ -1,4 +1,4 @@
-# <div style="text-align: center;">WorldInventory 1.0.1</div>
+# <div style="text-align: center;">WorldInventory 1.0.2</div>
 ### <div style="text-align: center;">by xBeastMode</div>
 
 <div style="text-align: center;">
