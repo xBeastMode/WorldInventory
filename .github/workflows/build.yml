@@ -21,7 +21,10 @@ jobs:
         run: |
           echo Building...
           chmod +x ./bin/ConsoleScript.php
-          ./bin/php7/bin/php -dphar.readonly=0 ./bin/ConsoleScript.php --make "resources,src,vendor,plugin.yml" --out WorldInventory.phar
+          wget https://poggit.pmmp.io/r/189704/libasynql_dev-181.phar -O libasynql.phar
+          ./bin/php7/bin/php -dphar.readonly=0 ./bin/ConsoleScript.php --make "resources,src,plugin.yml" --out WorldInventory.phar
+          echo Injecting virions...
+          ./bin/php7/bin/php -dphar.readonly=0 libasynql.phar WorldInventory.phar
           echo Build completed!
       - name: Create Release
         id: create_release
@@ -39,7 +42,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./WorldInventory.phar
           asset_name: WorldInventory.phar
           asset_content_type: application/phar
