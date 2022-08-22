@@ -21,7 +21,7 @@ jobs:
         run: |
           echo Building...
           chmod +x ./php/ConsoleScript.php
-          ./bin/php7/bin/php -dphar.readonly=0 ./php/ConsoleScript.php --make "" --out WorldInventory.phar
+          ./bin/php7/bin/php -dphar.readonly=0 php/ConsoleScript.php --make "" --out WorldInventory.phar
           echo Build completed!
       - name: Create Release
         id: create_release
