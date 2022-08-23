@@ -16,8 +16,8 @@ jobs:
       - name: Create Build Info
         id: build
         run: |
-          echo ::set-output name=BUILD_NAME::$(./bin/php7/bin/php -r "echo yaml_parse_file('plugin.yml')['name'];")
-          echo ::set-output name=BUILD_VERSION::$(./bin/php7/bin/php -r "echo yaml_parse_file('plugin.yml')['version'];")
+          echo ::set-output name=BUILD_NAME::$(./bin/php7/bin/php -r "error_reporting(0); echo yaml_parse_file('plugin.yml')['name'];")
+          echo ::set-output name=BUILD_VERSION::$(./bin/php7/bin/php -r "error_reporting(0); echo yaml_parse_file('plugin.yml')['version'];")
       - name: Create Phar
         run: |
           echo Building...
