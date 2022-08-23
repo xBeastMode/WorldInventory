@@ -16,6 +16,8 @@ jobs:
       - name: Create Build Info
         id: build
         run: |
+          EXTENSION_DIR=$(find "$(pwd)/bin" -name *debug-zts*)
+          grep -q '^extension_dir' bin/php7/bin/php.ini && sed -i'bak' "s{^extension_dir=.*{extension_dir=\"$EXTENSION_DIR\"{" bin/php7/bin/php.ini || echo "extension_dir=\"$EXTENSION_DIR\"" >> bin/php7/bin/php.ini
           echo ::set-output name=BUILD_NAME::$(./bin/php7/bin/php -r "ini_set('display_errors', 'Off'); echo yaml_parse_file('plugin.yml')['name'];")
           echo ::set-output name=BUILD_VERSION::$(./bin/php7/bin/php -r "ini_set('display_errors', 'Off'); echo yaml_parse_file('plugin.yml')['version'];")
       - name: Create Phar
