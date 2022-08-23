@@ -14,10 +14,10 @@ jobs:
       - name: Download Phar Console Script
         run: wget https://raw.githubusercontent.com/pmmp/DevTools/master/src/ConsoleScript.php -O ./bin/ConsoleScript.php
       - name: Create Build Info
-        run: |
-          echo ::set-output name=BUILD_NAME::$(./bin/php -r "echo yaml_parse_file('plugin.yml')['name'];")
-          echo ::set-output name=BUILD_VERSION::$(./bin/php -r "echo yaml_parse_file('plugin.yml')['version'];")
         id: build
+        run: |
+          echo ::set-output name=BUILD_NAME::$(./bin/php7/bin/php -r "echo yaml_parse_file('plugin.yml')['name'];")
+          echo ::set-output name=BUILD_VERSION::$(./bin/php7/bin/php -r "echo yaml_parse_file('plugin.yml')['version'];")
       - name: Create Phar
         run: |
           echo Building...
