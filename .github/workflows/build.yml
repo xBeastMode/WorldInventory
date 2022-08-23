@@ -15,8 +15,8 @@ jobs:
         run: wget https://raw.githubusercontent.com/pmmp/DevTools/master/src/ConsoleScript.php -O ./bin/ConsoleScript.php
       - name: Create Build Info
         run: |
-          echo ::set-output name=build_name::$(./bin/php -r "echo yaml_parse_file('plugin.yml')['name'];")
-          echo ::set-output name=build_version::$(./bin/php -r "echo yaml_parse_file('plugin.yml')['version'];")
+          echo ::set-output name=BUILD_NAME::$(./bin/php -r "echo yaml_parse_file('plugin.yml')['name'];")
+          echo ::set-output name=BUILD_VERSION::$(./bin/php -r "echo yaml_parse_file('plugin.yml')['version'];")
         id: build
       - name: Create Phar
         run: |
@@ -33,8 +33,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.build.outputs.build_version }}
-          release_name: ${{ steps.build.outputs.build_name }} ${{ steps.build.outputs.build_version }}
+          tag_name: ${{ steps.build.outputs.BUILD_VERSION }}
+          release_name: ${{ steps.build.outputs.BUILD_NAME }} ${{ steps.build.outputs.BUILD_VERSION }}
           draft: false
           prerelease: false
       - name: Upload Phar
