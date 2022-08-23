@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install PHP Binary
-        run: wget https://jenkins.pmmp.io/job/PHP-8.1-Aggregate/lastSuccessfulBuild/artifact/PHP-8.1-Linux-x86_64.tar.gz && tar xvf PHP-8.1-Linux-x86_64.tar.gz
+        run: wget https://jenkins.pmmp.io/job/PHP-8.0-Aggregate/lastSuccessfulBuild/artifact/PHP-8.0-Linux-x86_64.tar.gz && tar xvf PHP-8.0-Linux-x86_64.tar.gz
       - name: Download Phar Console Script
         run: wget https://raw.githubusercontent.com/pmmp/DevTools/master/src/ConsoleScript.php -O ./bin/ConsoleScript.php
       - name: Create Build Info
